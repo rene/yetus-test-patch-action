@@ -48,7 +48,7 @@ inputs:
     default: ''
   javahome:
     description: 'Location of the JDK to use'
-    default: '/usr/lib/jvm/java-11-openjdk-amd64'
+    default: '${JAVA_HOME_11_X64}'
   patchdir:
     description: 'Directory location of logs, temp space, etc'
     required: true
@@ -72,7 +72,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: docker://docker.io/renezededa/yetus:main
+  image: docker://docker.io/renezededa/yetus:test
   args:
     - test-patch
     - --basedir=${{ inputs.basedir }}
@@ -97,3 +97,4 @@ runs:
     - --report-unknown-options=false
     - --revive-config=${{ inputs.reviveconfig }}
     - --tests-filter=${{ inputs.testsfilter }}
+    - --debug
